@@ -10,7 +10,7 @@
 
     <!-- Application-specific resources -->
 
-    <x:String x:Key="AppName">Okra_Todo</x:String>
+    <x:String x:Key="AppName">Okra Todo</x:String>
 
   </Application.Resources>
 </okra:OkraApplication>

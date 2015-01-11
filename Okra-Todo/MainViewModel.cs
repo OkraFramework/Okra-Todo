@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Okra.TodoSample.Data;
+using System.Collections.ObjectModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -24,12 +26,39 @@ namespace Okra.TodoSample
     /// A basic view model that provides characteristics common to most applications.
     /// </summary>
     [ViewModelExport(SpecialPageNames.Home)]
-    public class MainPageViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
+        private ITodoRepository todoRepository;
+
+        private IList<TodoItem> todoItems = new ObservableCollection<TodoItem>();
+
         [ImportingConstructor]
-        public MainPageViewModel(INavigationContext navigationContext)
+        public MainViewModel(INavigationContext navigationContext, ITodoRepository todoRepository)
             : base(navigationContext)
         {
+            this.todoRepository = todoRepository;
+
+            InitializeData();
+        }
+
+        protected MainViewModel()
+        {
+        }
+
+        public IList<TodoItem> TodoItems
+        {
+            get
+            {
+                return todoItems;
+            }
+        }
+
+        private void InitializeData()
+        {
+            IList<TodoItem> items = todoRepository.GetTodoItems();
+
+            foreach (TodoItem item in items)
+                this.todoItems.Add(item);
         }
     }
 }

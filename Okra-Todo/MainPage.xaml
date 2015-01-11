@@ -7,11 +7,20 @@
     xmlns:common="using:Okra.TodoSample.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=local:MainDesignData, IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <DataTemplate x:Key="TodoItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Title}" Grid.Column="1" Style="{StaticResource SubheaderTextBlockStyle}" Margin="20,0,0,0"/>
+                <CheckBox IsChecked="{Binding Completed, Mode=TwoWay}"/>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <!--
@@ -45,5 +54,6 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <ListView Grid.Row="1" ItemsSource="{Binding TodoItems}" ItemTemplate="{StaticResource TodoItemTemplate}" MaxWidth="800" SelectionMode="None"/>
     </Grid>
 </Page>
