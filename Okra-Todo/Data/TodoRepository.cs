@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Okra_Todo.Data
 {
     [Export(typeof(ITodoRepository))]
-    public class TodoRepository
+    public class TodoRepository : ITodoRepository
     {
         public IList<TodoItem> GetTodoItems()
         {
