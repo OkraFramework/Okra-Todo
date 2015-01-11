@@ -2,6 +2,7 @@
 using Okra.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,14 +21,15 @@ using Windows.UI.Xaml.Navigation;
 namespace Okra_Todo
 {
     /// <summary>
-    /// A basic page that provides characteristics common to most applications.
+    /// A basic view model that provides characteristics common to most applications.
     /// </summary>
-    [PageExport(SpecialPageNames.Home)]
-    public sealed partial class MainPage : Page
+    [ViewModelExport(SpecialPageNames.Home)]
+    public class MainPageViewModel : ViewModelBase
     {
-        public MainPage()
+        [ImportingConstructor]
+        public MainPageViewModel(INavigationContext navigationContext)
+            : base(navigationContext)
         {
-            this.InitializeComponent();
         }
     }
 }
