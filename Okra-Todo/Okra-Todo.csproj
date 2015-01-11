@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{cc0814aa-2d7c-4c16-95bd-ffe254a3dfbe}</ProjectGuid>
+    <ProjectGuid>{CC0814AA-2D7C-4C16-95BD-FFE254A3DFBE}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Okra_Todo</RootNamespace>
@@ -14,9 +14,7 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    
     <PackageCertificateKeyFile>Okra-Todo_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -120,16 +118,14 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="Okra-Todo_TemporaryKey.pfx" />
-    
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-	<Content Include="Assets\Logo.scale-100.png" />
-	<Content Include="Assets\SmallLogo.scale-100.png" />
-	<Content Include="Assets\SplashScreen.scale-100.png" />
-	<Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\SmallLogo.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -141,15 +137,14 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="Okra.Core, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Okra.Core, Version=0.9.9.37, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Okra.Core.0.9.8\lib\netcore451\Okra.Core.dll</HintPath>
+      <HintPath>..\packages\Okra.Core.0.9.9-alpha037\lib\netcore451\Okra.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Okra.MEF, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Okra.MEF, Version=0.9.9.37, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Okra.MEF.0.9.8\lib\netcore451\Okra.MEF.dll</HintPath>
+      <HintPath>..\packages\Okra.MEF.0.9.9-alpha037\lib\netcore451\Okra.MEF.dll</HintPath>
     </Reference>
     <Reference Include="System.Composition.AttributedModel">
       <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
@@ -167,11 +162,9 @@
       <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
     </Reference>
   </ItemGroup>
-  
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
-
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
