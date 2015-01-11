@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra_Todo
+namespace Okra.TodoSample
 {
     public class AppBootstrapper : OkraBootstrapper
     {

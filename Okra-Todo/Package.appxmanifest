@@ -23,7 +23,7 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="Okra_Todo.App">
+        EntryPoint="Okra.TodoSample.App">
         <m2:VisualElements
             DisplayName="Okra-Todo"
             Square150x150Logo="Assets\Logo.png"

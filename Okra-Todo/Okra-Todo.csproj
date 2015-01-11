@@ -7,7 +7,7 @@
     <ProjectGuid>{CC0814AA-2D7C-4C16-95BD-FFE254A3DFBE}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Okra_Todo</RootNamespace>
+    <RootNamespace>Okra.TodoSample</RootNamespace>
     <AssemblyName>Okra-Todo</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>

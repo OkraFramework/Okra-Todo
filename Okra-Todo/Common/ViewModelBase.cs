@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Okra_Todo.Common
+namespace Okra.TodoSample.Common
 {
     /// <summary>
     /// Typical implementation of a view-model base class. This includes,

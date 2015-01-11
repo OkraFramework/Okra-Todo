@@ -1,4 +1,4 @@
-﻿using Okra_Todo.Common;
+﻿using Okra.TodoSample.Common;
 using Okra.Navigation;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace Okra_Todo
+namespace Okra.TodoSample
 {
     /// <summary>
     /// A basic page that provides characteristics common to most applications.

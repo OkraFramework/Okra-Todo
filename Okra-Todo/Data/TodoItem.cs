@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra_Todo.Data
+namespace Okra.TodoSample.Data
 {
     public class TodoItem : NotifyPropertyChangedBase
     {
