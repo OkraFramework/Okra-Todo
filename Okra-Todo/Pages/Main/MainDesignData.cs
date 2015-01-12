@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okra.TodoSample
+namespace Okra.TodoSample.Pages.Main
 {
     public class MainDesignData : MainViewModel
     {

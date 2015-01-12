@@ -103,7 +103,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Page Include="MainPage.xaml">
+    <Page Include="Pages\Main\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,11 +116,11 @@
     <Compile Include="Data\ITodoRepository.cs" />
     <Compile Include="Data\TodoItem.cs" />
     <Compile Include="Data\TodoRepository.cs" />
-    <Compile Include="MainDesignData.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Pages\Main\MainDesignData.cs" />
+    <Compile Include="Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="Pages\Main\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppBootstrapper.cs" />
   </ItemGroup>

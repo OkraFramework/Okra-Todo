@@ -20,7 +20,7 @@ using System.Collections.ObjectModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace Okra.TodoSample
+namespace Okra.TodoSample.Pages.Main
 {
     /// <summary>
     /// A basic view model that provides characteristics common to most applications.
