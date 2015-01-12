@@ -19,6 +19,7 @@ using Okra.TodoSample.Data;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Okra.Core;
+using Okra.TodoSample.DataModels;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -32,7 +33,7 @@ namespace Okra.TodoSample.Pages.Main
     {
         private ITodoRepository todoRepository;
 
-        private IList<TodoItem> todoItems = new ObservableCollection<TodoItem>();
+        private IList<TodoItemDataModel> todoItems = new ObservableCollection<TodoItemDataModel>();
 
         [ImportingConstructor]
         public MainViewModel(INavigationContext navigationContext, ITodoRepository todoRepository)
@@ -55,7 +56,7 @@ namespace Okra.TodoSample.Pages.Main
             private set;
         }
 
-        public IList<TodoItem> TodoItems
+        public IList<TodoItemDataModel> TodoItems
         {
             get
             {
@@ -72,7 +73,7 @@ namespace Okra.TodoSample.Pages.Main
             IList<TodoItem> items = todoRepository.GetTodoItems();
 
             foreach (TodoItem item in items)
-                this.todoItems.Add(item);
+                this.todoItems.Add(new TodoItemDataModel(item));
         }
     }
 }

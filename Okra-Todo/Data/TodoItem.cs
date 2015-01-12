@@ -7,33 +7,18 @@ using System.Threading.Tasks;
 
 namespace Okra.TodoSample.Data
 {
-    public class TodoItem : NotifyPropertyChangedBase
+    public class TodoItem
     {
-        private string title;
-        private bool completed;
-
         public string Title
         {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                SetProperty(ref title, value);
-            }
+            get;
+            set;
         }
 
         public bool Completed
         {
-            get
-            {
-                return completed;
-            }
-            set
-            {
-                SetProperty(ref completed, value);
-            }
+            get;
+            set;
         }
     }
 }

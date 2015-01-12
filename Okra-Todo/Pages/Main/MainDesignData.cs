@@ -1,4 +1,5 @@
 ﻿using Okra.TodoSample.Data;
+using Okra.TodoSample.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace Okra.TodoSample.Pages.Main
     {
         public MainDesignData()
         {
-            this.TodoItems.Add(new TodoItem { Title = "First Design-Time Item" });
-            this.TodoItems.Add(new TodoItem { Title = "Second Design-Time Item", Completed = true });
-            this.TodoItems.Add(new TodoItem { Title = "Third Design-Time Item" });
+            this.TodoItems.Add(new TodoItemDataModel { Title = "First Design-Time Item" });
+            this.TodoItems.Add(new TodoItemDataModel { Title = "Second Design-Time Item", Completed = true });
+            this.TodoItems.Add(new TodoItemDataModel { Title = "Third Design-Time Item" });
         }
     }
 }
