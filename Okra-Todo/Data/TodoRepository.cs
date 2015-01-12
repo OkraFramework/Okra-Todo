@@ -25,7 +25,7 @@ namespace Okra.TodoSample.Data
 
         public TodoItem GetTodoItemById(string id)
         {
-            return todoItems.Where(item => item.Id == id).FirstOrDefault();
+            return todoItems.FirstOrDefault(item => item.Id == id);
         }
 
         public IList<TodoItem> GetTodoItems()
@@ -42,6 +42,14 @@ namespace Okra.TodoSample.Data
         public void RemoveTodoItem(TodoItem todoItem)
         {
             this.todoItems.Remove(todoItem);
+        }
+
+        public void UpdateTodoItem(TodoItem todoItem)
+        {
+            TodoItem internalItem = todoItems.First(item => item.Id == todoItem.Id);
+
+            internalItem.Title = todoItem.Title;
+            internalItem.Completed = todoItem.Completed;
         }
     }
 }
