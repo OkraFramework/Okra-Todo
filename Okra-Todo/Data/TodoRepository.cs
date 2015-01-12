@@ -11,6 +11,7 @@ namespace Okra.TodoSample.Data
     public class TodoRepository : ITodoRepository
     {
         private IList<TodoItem> todoItems;
+        private int nextId = 4;
 
         public TodoRepository()
         {
@@ -34,6 +35,7 @@ namespace Okra.TodoSample.Data
 
         public void AddTodoItem(TodoItem todoItem)
         {
+            todoItem.Id = (nextId++).ToString();
             this.todoItems.Add(todoItem);
         }
 
