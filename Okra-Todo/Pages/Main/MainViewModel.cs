@@ -42,6 +42,7 @@ namespace Okra.TodoSample.Pages.Main
             this.todoRepository = todoRepository;
 
             this.AddItemCommand = new DelegateCommand(AddItem);
+            this.ViewItemDetailCommand = new DelegateCommand<TodoItemDataModel>(ViewItemDetail);
 
             InitializeData();
         }
@@ -51,6 +52,12 @@ namespace Okra.TodoSample.Pages.Main
         }
 
         public ICommand AddItemCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand ViewItemDetailCommand
         {
             get;
             private set;
@@ -66,6 +73,11 @@ namespace Okra.TodoSample.Pages.Main
 
         public void AddItem()
         {
+        }
+
+        public void ViewItemDetail(TodoItemDataModel todoItemDataModel)
+        {
+            NavigationManager.NavigateTo("ItemDetail");
         }
 
         private void InitializeData()
