@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Okra.TodoSample.Data;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Okra.Core;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -38,11 +40,19 @@ namespace Okra.TodoSample.Pages.Main
         {
             this.todoRepository = todoRepository;
 
+            this.AddItemCommand = new DelegateCommand(AddItem);
+
             InitializeData();
         }
 
         protected MainViewModel()
         {
+        }
+
+        public ICommand AddItemCommand
+        {
+            get;
+            private set;
         }
 
         public IList<TodoItem> TodoItems
@@ -51,6 +61,10 @@ namespace Okra.TodoSample.Pages.Main
             {
                 return todoItems;
             }
+        }
+
+        public void AddItem()
+        {
         }
 
         private void InitializeData()

@@ -22,6 +22,11 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Add" Label="Add Item" Command="{Binding AddItemCommand, Mode=OneWay}"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
