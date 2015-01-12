@@ -10,6 +10,7 @@ namespace Okra.TodoSample.DataModels
 {
     public class TodoItemDataModel : NotifyPropertyChangedBase
     {
+        private string id;
         private string title;
         private bool completed;
 
@@ -19,8 +20,17 @@ namespace Okra.TodoSample.DataModels
 
         public TodoItemDataModel(TodoItem todoItem)
         {
-            this.Title = todoItem.Title;
-            this.Completed = todoItem.Completed;
+            this.id = todoItem.Id;
+            this.title = todoItem.Title;
+            this.completed = todoItem.Completed;
+        }
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
         }
 
         public string Title

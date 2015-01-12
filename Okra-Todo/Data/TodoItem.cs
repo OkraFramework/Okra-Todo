@@ -9,6 +9,12 @@ namespace Okra.TodoSample.Data
 {
     public class TodoItem
     {
+        public string Id
+        {
+            get;
+            set;
+        }
+
         public string Title
         {
             get;

@@ -8,6 +8,7 @@ namespace Okra.TodoSample.Data
 {
     public interface ITodoRepository
     {
+        TodoItem GetTodoItemById(string id);
         IList<TodoItem> GetTodoItems();
     }
 }

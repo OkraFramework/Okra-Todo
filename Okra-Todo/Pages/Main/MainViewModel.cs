@@ -77,7 +77,7 @@ namespace Okra.TodoSample.Pages.Main
 
         public void ViewItemDetail(TodoItemDataModel todoItemDataModel)
         {
-            NavigationManager.NavigateTo("ItemDetail");
+            NavigationManager.NavigateTo("ItemDetail", todoItemDataModel.Id);
         }
 
         private void InitializeData()
