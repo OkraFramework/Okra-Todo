@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Okra.TodoSample.Data
 {
     [Export(typeof(ITodoRepository))]
+    [Shared]
     public class TodoRepository : ITodoRepository
     {
         private IList<TodoItem> todoItems;
@@ -33,10 +34,11 @@ namespace Okra.TodoSample.Data
             return todoItems;
         }
 
-        public void AddTodoItem(TodoItem todoItem)
+        public TodoItem AddTodoItem(TodoItem todoItem)
         {
             todoItem.Id = (nextId++).ToString();
             this.todoItems.Add(todoItem);
+            return todoItem;
         }
 
         public void RemoveTodoItem(TodoItem todoItem)

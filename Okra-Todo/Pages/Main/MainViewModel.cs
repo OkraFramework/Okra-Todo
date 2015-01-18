@@ -31,17 +31,20 @@ namespace Okra.TodoSample.Pages.Main
     [ViewModelExport(SpecialPageNames.Home)]
     public class MainViewModel : ViewModelBase
     {
-        private ITodoRepository todoRepository;
+        private ITodoDataStore todoDataStore;
 
+        private DelegateCommand addNewItemCommand;
+
+        private string addNewItemText;
         private IList<TodoItemDataModel> todoItems = new ObservableCollection<TodoItemDataModel>();
 
         [ImportingConstructor]
-        public MainViewModel(INavigationContext navigationContext, ITodoRepository todoRepository)
+        public MainViewModel(INavigationContext navigationContext, ITodoDataStore todoRepository)
             : base(navigationContext)
         {
-            this.todoRepository = todoRepository;
+            this.todoDataStore = todoRepository;
 
-            this.AddItemCommand = new DelegateCommand(AddItem);
+            this.addNewItemCommand = new DelegateCommand(AddNewItem, CanAddNewItem);
             this.ViewItemDetailCommand = new DelegateCommand<TodoItemDataModel>(ViewItemDetail);
 
             InitializeData();
@@ -51,16 +54,31 @@ namespace Okra.TodoSample.Pages.Main
         {
         }
 
-        public ICommand AddItemCommand
+        public ICommand AddNewItemCommand
         {
-            get;
-            private set;
+            get
+            {
+                return addNewItemCommand;
+            }
         }
 
         public ICommand ViewItemDetailCommand
         {
             get;
             private set;
+        }
+
+        public string AddNewItemText
+        {
+            get
+            {
+                return addNewItemText;
+            }
+            set
+            {
+                SetProperty(ref addNewItemText, value);
+                addNewItemCommand.NotifyCanExecuteChanged();
+            }
         }
 
         public IList<TodoItemDataModel> TodoItems
@@ -71,8 +89,15 @@ namespace Okra.TodoSample.Pages.Main
             }
         }
 
-        public void AddItem()
+        public void AddNewItem()
         {
+            todoDataStore.AddTodoItem(this.AddNewItemText);
+            this.AddNewItemText = null;
+        }
+
+        public bool CanAddNewItem()
+        {
+            return !string.IsNullOrEmpty(AddNewItemText);
         }
 
         public void ViewItemDetail(TodoItemDataModel todoItemDataModel)
@@ -82,10 +107,7 @@ namespace Okra.TodoSample.Pages.Main
 
         private void InitializeData()
         {
-            IList<TodoItem> items = todoRepository.GetTodoItems();
-
-            foreach (TodoItem item in items)
-                this.todoItems.Add(new TodoItemDataModel(item));
+            this.todoItems = todoDataStore.GetTodoItems();
         }
     }
 }

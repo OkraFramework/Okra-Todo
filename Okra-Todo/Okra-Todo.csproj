@@ -118,6 +118,8 @@
     </Compile>
     <Compile Include="Behaviors\ItemClickBehavior.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="DataModels\ITodoDataStore.cs" />
+    <Compile Include="DataModels\TodoDataStore.cs" />
     <Compile Include="DataModels\TodoItemDataModel.cs" />
     <Compile Include="Data\ITodoRepository.cs" />
     <Compile Include="Data\TodoItem.cs" />

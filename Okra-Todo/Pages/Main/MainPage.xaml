@@ -26,7 +26,6 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Add" Label="Add Item" Command="{Binding AddItemCommand, Mode=OneWay}"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -61,10 +60,24 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        <ListView Grid.Row="1" ItemsSource="{Binding TodoItems}" ItemTemplate="{StaticResource TodoItemTemplate}" MaxWidth="800" SelectionMode="None" IsItemClickEnabled="True">
-            <i:Interaction.Behaviors>
-                <behaviors:ItemClickBehavior Command="{Binding ViewItemDetailCommand}"/>
-            </i:Interaction.Behaviors>
-        </ListView>
+        <Grid Grid.Row="1" MaxWidth="800">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding TodoItems}" ItemTemplate="{StaticResource TodoItemTemplate}" MaxWidth="800" SelectionMode="None" IsItemClickEnabled="True" Grid.Row="1">
+                <i:Interaction.Behaviors>
+                    <behaviors:ItemClickBehavior Command="{Binding ViewItemDetailCommand}"/>
+                </i:Interaction.Behaviors>
+            </ListView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="147*"/>
+                    <ColumnDefinition Width="13*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox TextWrapping="Wrap" PlaceholderText="Add task..." Text="{Binding AddNewItemText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="26.667" FontWeight="Light" VerticalAlignment="Center"/>
+                <AppBarButton Grid.Column="1" Icon="Add" IsCompact="True" Command="{Binding AddNewItemCommand, Mode=OneWay}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
