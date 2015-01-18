@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Okra.Services;
+using System;
 using System.Collections.Generic;
 using System.Composition;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Okra.TodoSample.Data
 {
@@ -11,48 +15,93 @@ namespace Okra.TodoSample.Data
     [Shared]
     public class TodoRepository : ITodoRepository
     {
-        private IList<TodoItem> todoItems;
-        private int nextId = 4;
+        private IStorageManager storageManager;
 
-        public TodoRepository()
+        private const string STORAGE_FILENAME = "TodoItems.xml";
+
+        private List<TodoItem> todoItems;
+        private int nextId;
+
+        [ImportingConstructor]
+        public TodoRepository(IStorageManager storageManager)
         {
-            this.todoItems = new List<TodoItem>
-                {
-                    new TodoItem() { Id = "1", Title = "First item"},
-                    new TodoItem() { Id = "2", Title = "Second item"},
-                    new TodoItem() { Id = "3", Title = "Third item"}
-                };
+            this.storageManager = storageManager;
         }
 
-        public TodoItem GetTodoItemById(string id)
+        public async Task<TodoItem> GetTodoItemByIdAsync(string id)
         {
+            if (todoItems == null)
+                await LoadTodoItemsAsync();
+
             return todoItems.FirstOrDefault(item => item.Id == id);
         }
 
-        public IList<TodoItem> GetTodoItems()
+        public async Task<IList<TodoItem>> GetTodoItemsAsync()
         {
+            if (todoItems == null)
+                await LoadTodoItemsAsync();
+
             return todoItems;
         }
 
-        public TodoItem AddTodoItem(TodoItem todoItem)
+        public async Task<TodoItem> AddTodoItemAsync(TodoItem todoItem)
         {
             todoItem.Id = (nextId++).ToString();
             this.todoItems.Add(todoItem);
+            
+            await SaveTodoItemsAsync();
+
             return todoItem;
         }
 
-        public void RemoveTodoItem(string itemId)
+        public async Task RemoveTodoItemAsync(string itemId)
         {
             TodoItem todoItem = todoItems.First(i => i.Id == itemId);
             this.todoItems.Remove(todoItem);
+
+            await SaveTodoItemsAsync();
         }
 
-        public void UpdateTodoItem(TodoItem todoItem)
+        public async Task UpdateTodoItemAsync(TodoItem todoItem)
         {
             TodoItem internalItem = todoItems.First(item => item.Id == todoItem.Id);
 
             internalItem.Title = todoItem.Title;
             internalItem.Completed = todoItem.Completed;
+
+            await SaveTodoItemsAsync();
+        }
+
+        private async Task LoadTodoItemsAsync()
+        {
+            StorageFolder folder = ApplicationData.Current.RoamingFolder;
+            StorageFile file = await folder.TryGetItemAsync(STORAGE_FILENAME) as StorageFile;
+
+            if (file != null)
+            {
+                todoItems = await storageManager.RetrieveAsync<List<TodoItem>>(file);
+                //using (Stream stream = await file.OpenStreamForReadAsync())
+                //{
+                //    DataContractSerializer serializer = new DataContractSerializer(typeof(List<TodoItem>));
+                //    todoItems = serializer.ReadObject(stream);
+                //}
+            }
+            else
+            {
+                this.todoItems = new List<TodoItem>
+                {
+                    new TodoItem() { Id = "1", Title = "Install Okra Todo", Completed = true},
+                    new TodoItem() { Id = "2", Title = "Add new todo items"},
+                    new TodoItem() { Id = "3", Title = "Inspect source code"}
+                };
+            }
+
+            nextId = int.Parse(this.todoItems.Last().Id) + 1;
+        }
+
+        private async Task SaveTodoItemsAsync()
+        {
+            await storageManager.StoreAsync<List<TodoItem>>(ApplicationData.Current.RoamingFolder, STORAGE_FILENAME, todoItems);
         }
     }
 }

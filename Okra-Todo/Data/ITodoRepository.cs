@@ -8,10 +8,10 @@ namespace Okra.TodoSample.Data
 {
     public interface ITodoRepository
     {
-        TodoItem GetTodoItemById(string id);
-        IList<TodoItem> GetTodoItems();
-        TodoItem AddTodoItem(TodoItem todoItem);
-        void RemoveTodoItem(string itemId);
-        void UpdateTodoItem(TodoItem todoItem);
+        Task<TodoItem> GetTodoItemByIdAsync(string id);
+        Task<IList<TodoItem>> GetTodoItemsAsync();
+        Task<TodoItem> AddTodoItemAsync(TodoItem todoItem);
+        Task RemoveTodoItemAsync(string itemId);
+        Task UpdateTodoItemAsync(TodoItem todoItem);
     }
 }

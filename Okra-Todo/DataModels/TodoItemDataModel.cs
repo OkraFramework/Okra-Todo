@@ -56,5 +56,15 @@ namespace Okra.TodoSample.DataModels
                 SetProperty(ref completed, value);
             }
         }
+
+        public TodoItem ToTodoItem()
+        {
+            return new TodoItem
+                        {
+                            Id = this.Id,
+                            Title = this.Title,
+                            Completed = this.Completed
+                        };
+        }
     }
 }

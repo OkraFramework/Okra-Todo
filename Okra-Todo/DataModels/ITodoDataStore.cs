@@ -9,7 +9,8 @@ namespace Okra.TodoSample.DataModels
     public interface ITodoDataStore
     {
         IList<TodoItemDataModel> GetTodoItems();
-        void AddTodoItem(string title);
-        void RemoveTodoItem(TodoItemDataModel item);
+        Task<TodoItemDataModel> GetTodoItemByIdAsync(string id);
+        Task AddTodoItemAsync(string title);
+        Task RemoveTodoItemAsync(TodoItemDataModel item);
     }
 }

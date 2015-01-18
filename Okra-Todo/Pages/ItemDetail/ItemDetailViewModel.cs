@@ -16,7 +16,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Okra.TodoSample.DataModels;
-using Okra.TodoSample.Data;
+using Okra.TodoSample.DataModels;
+using System.Threading.Tasks;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -28,15 +29,15 @@ namespace Okra.TodoSample.Pages.ItemDetail
     [ViewModelExport("ItemDetail")]
     public class ItemDetailViewModel : ViewModelBase, IActivatable
     {
-        private ITodoRepository todoRepository;
+        private ITodoDataStore todoDataStore;
 
         private TodoItemDataModel todoItem;
 
         [ImportingConstructor]
-        public ItemDetailViewModel(INavigationContext navigationContext, ITodoRepository todoRepository)
+        public ItemDetailViewModel(INavigationContext navigationContext, ITodoDataStore todoDataStore)
             : base(navigationContext)
         {
-            this.todoRepository = todoRepository;
+            this.todoDataStore = todoDataStore;
         }
 
         protected ItemDetailViewModel()
@@ -55,12 +56,10 @@ namespace Okra.TodoSample.Pages.ItemDetail
             }
         }
 
-        public void Activate(PageInfo pageInfo)
+        public async void Activate(PageInfo pageInfo)
         {
             string todoItemId = pageInfo.GetArguments<string>();
-
-            TodoItem todoItem = todoRepository.GetTodoItemById(todoItemId);
-            this.TodoItem = new TodoItemDataModel(todoItem);
+            this.TodoItem = await todoDataStore.GetTodoItemByIdAsync(todoItemId);
         }
 
         public void SaveState(PageInfo pageInfo)

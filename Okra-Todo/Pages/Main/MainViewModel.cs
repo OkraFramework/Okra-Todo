@@ -98,7 +98,7 @@ namespace Okra.TodoSample.Pages.Main
 
         public void AddNewItem()
         {
-            todoDataStore.AddTodoItem(this.AddNewItemText);
+            todoDataStore.AddTodoItemAsync(this.AddNewItemText);
             this.AddNewItemText = null;
         }
 
@@ -107,12 +107,12 @@ namespace Okra.TodoSample.Pages.Main
             return !string.IsNullOrEmpty(AddNewItemText);
         }
 
-        public void RemoveCompletedItems()
+        public async void RemoveCompletedItems()
         {
             IList<TodoItemDataModel> itemsToRemove = TodoItems.Where(i => i.Completed).ToList();
 
             foreach (TodoItemDataModel item in itemsToRemove)
-                todoDataStore.RemoveTodoItem(item);
+                await todoDataStore.RemoveTodoItemAsync(item);
         }
 
         public void ViewItemDetail(TodoItemDataModel todoItemDataModel)
