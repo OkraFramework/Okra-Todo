@@ -60,13 +60,13 @@ namespace Okra.TodoSample.DataModels
             if (initializationTask == null)
             {
                 this.todoItems = new ObservableCollection<TodoItemDataModel>();
-                initializationTask = InitializeTodoListAsync();
+                initializationTask = LoadTodoListAsync();
             }
 
             return initializationTask;
         }
 
-        private async Task InitializeTodoListAsync()
+        private async Task LoadTodoListAsync()
         {
             IList<TodoItem> todoItems = await todoRepository.GetTodoItemsAsync();
 
