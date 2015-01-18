@@ -41,8 +41,9 @@ namespace Okra.TodoSample.Data
             return todoItem;
         }
 
-        public void RemoveTodoItem(TodoItem todoItem)
+        public void RemoveTodoItem(string itemId)
         {
+            TodoItem todoItem = todoItems.First(i => i.Id == itemId);
             this.todoItems.Remove(todoItem);
         }
 

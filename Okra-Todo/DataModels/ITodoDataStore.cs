@@ -10,5 +10,6 @@ namespace Okra.TodoSample.DataModels
     {
         IList<TodoItemDataModel> GetTodoItems();
         void AddTodoItem(string title);
+        void RemoveTodoItem(TodoItemDataModel item);
     }
 }

@@ -37,6 +37,12 @@ namespace Okra.TodoSample.DataModels
             this.todoItems.Add(new TodoItemDataModel(todoItem));
         }
 
+        public void RemoveTodoItem(TodoItemDataModel item)
+        {
+            todoRepository.RemoveTodoItem(item.Id);
+            this.todoItems.Remove(item);
+        }
+
         private void InitializeTodoList()
         {
             IList<TodoItem> todoItems = todoRepository.GetTodoItems();

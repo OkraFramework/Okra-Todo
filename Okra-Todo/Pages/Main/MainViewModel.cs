@@ -45,6 +45,7 @@ namespace Okra.TodoSample.Pages.Main
             this.todoDataStore = todoRepository;
 
             this.addNewItemCommand = new DelegateCommand(AddNewItem, CanAddNewItem);
+            this.RemoveCompletedItemsCommand = new DelegateCommand(RemoveCompletedItems);
             this.ViewItemDetailCommand = new DelegateCommand<TodoItemDataModel>(ViewItemDetail);
 
             InitializeData();
@@ -60,6 +61,12 @@ namespace Okra.TodoSample.Pages.Main
             {
                 return addNewItemCommand;
             }
+        }
+
+        public ICommand RemoveCompletedItemsCommand
+        {
+            get;
+            private set;
         }
 
         public ICommand ViewItemDetailCommand
@@ -98,6 +105,14 @@ namespace Okra.TodoSample.Pages.Main
         public bool CanAddNewItem()
         {
             return !string.IsNullOrEmpty(AddNewItemText);
+        }
+
+        public void RemoveCompletedItems()
+        {
+            IList<TodoItemDataModel> itemsToRemove = TodoItems.Where(i => i.Completed).ToList();
+
+            foreach (TodoItemDataModel item in itemsToRemove)
+                todoDataStore.RemoveTodoItem(item);
         }
 
         public void ViewItemDetail(TodoItemDataModel todoItemDataModel)

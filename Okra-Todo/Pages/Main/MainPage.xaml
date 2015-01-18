@@ -28,6 +28,7 @@
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
+            <AppBarButton Icon="Delete" Label="Clear completed" Command="{Binding RemoveCompletedItemsCommand, Mode=OneWay}"/>
         </CommandBar>
     </Page.BottomAppBar>
 

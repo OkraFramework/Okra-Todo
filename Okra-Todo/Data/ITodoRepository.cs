@@ -11,7 +11,7 @@ namespace Okra.TodoSample.Data
         TodoItem GetTodoItemById(string id);
         IList<TodoItem> GetTodoItems();
         TodoItem AddTodoItem(TodoItem todoItem);
-        void RemoveTodoItem(TodoItem todoItem);
+        void RemoveTodoItem(string itemId);
         void UpdateTodoItem(TodoItem todoItem);
     }
 }
