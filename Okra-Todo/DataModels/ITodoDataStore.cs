@@ -12,5 +12,7 @@ namespace Okra.TodoSample.DataModels
         Task<TodoItemDataModel> GetTodoItemByIdAsync(string id);
         Task AddTodoItemAsync(string title);
         Task RemoveTodoItemAsync(TodoItemDataModel item);
+
+        Task AddNoteAsync(TodoItemDataModel item, string note);
     }
 }

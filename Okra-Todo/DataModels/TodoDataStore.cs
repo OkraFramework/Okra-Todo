@@ -55,6 +55,12 @@ namespace Okra.TodoSample.DataModels
             this.todoItems.Remove(item);
         }
 
+        public async Task AddNoteAsync(TodoItemDataModel item, string note)
+        {
+            await todoRepository.AddNoteAsync(item.Id, note);
+            item.Notes.Add(note);
+        }
+
         private Task InitializeTodoListAsync()
         {
             if (initializationTask == null)

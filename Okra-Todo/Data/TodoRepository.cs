@@ -72,6 +72,15 @@ namespace Okra.TodoSample.Data
             await SaveTodoItemsAsync();
         }
 
+        public async Task AddNoteAsync(string itemId, string note)
+        {
+            TodoItem internalItem = todoItems.First(item => item.Id == itemId);
+
+            internalItem.Notes.Add(note);
+
+            await SaveTodoItemsAsync();
+        }
+
         private async Task LoadTodoItemsAsync()
         {
             StorageFolder folder = ApplicationData.Current.RoamingFolder;
@@ -80,11 +89,6 @@ namespace Okra.TodoSample.Data
             if (file != null)
             {
                 todoItems = await storageManager.RetrieveAsync<List<TodoItem>>(file);
-                //using (Stream stream = await file.OpenStreamForReadAsync())
-                //{
-                //    DataContractSerializer serializer = new DataContractSerializer(typeof(List<TodoItem>));
-                //    todoItems = serializer.ReadObject(stream);
-                //}
             }
             else
             {

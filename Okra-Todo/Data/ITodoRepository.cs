@@ -10,8 +10,11 @@ namespace Okra.TodoSample.Data
     {
         Task<TodoItem> GetTodoItemByIdAsync(string id);
         Task<IList<TodoItem>> GetTodoItemsAsync();
+
         Task<TodoItem> AddTodoItemAsync(TodoItem todoItem);
         Task RemoveTodoItemAsync(string itemId);
         Task UpdateTodoItemAsync(TodoItem todoItem);
+
+        Task AddNoteAsync(string itemId, string note);
     }
 }

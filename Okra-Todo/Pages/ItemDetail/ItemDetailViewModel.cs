@@ -16,8 +16,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Okra.TodoSample.DataModels;
-using Okra.TodoSample.DataModels;
 using System.Threading.Tasks;
+using Okra.Core;
+using System.Windows.Input;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -31,6 +32,9 @@ namespace Okra.TodoSample.Pages.ItemDetail
     {
         private ITodoDataStore todoDataStore;
 
+        private DelegateCommand addNoteCommand;
+
+        private string addNoteText;
         private TodoItemDataModel todoItem;
 
         [ImportingConstructor]
@@ -38,10 +42,33 @@ namespace Okra.TodoSample.Pages.ItemDetail
             : base(navigationContext)
         {
             this.todoDataStore = todoDataStore;
+
+            this.addNoteCommand = new DelegateCommand(AddNote, CanAddNote);
         }
 
         protected ItemDetailViewModel()
         {
+        }
+
+        public ICommand AddNoteCommand
+        {
+            get
+            {
+                return addNoteCommand;
+            }
+        }
+
+        public string AddNoteText
+        {
+            get
+            {
+                return addNoteText;
+            }
+            set
+            {
+                SetProperty(ref addNoteText, value);
+                addNoteCommand.NotifyCanExecuteChanged();
+            }
         }
 
         public TodoItemDataModel TodoItem
@@ -64,6 +91,17 @@ namespace Okra.TodoSample.Pages.ItemDetail
 
         public void SaveState(PageInfo pageInfo)
         {
+        }
+
+        public void AddNote()
+        {
+            todoDataStore.AddNoteAsync(TodoItem, this.AddNoteText);
+            this.AddNoteText = null;
+        }
+
+        public bool CanAddNote()
+        {
+            return !string.IsNullOrEmpty(AddNoteText);
         }
     }
 }

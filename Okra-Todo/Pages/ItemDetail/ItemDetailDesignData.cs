@@ -11,7 +11,15 @@ namespace Okra.TodoSample.Pages.ItemDetail
     {
         public ItemDetailDesignData()
         {
-            this.TodoItem = new TodoItemDataModel { Title = "My Todo Item" };
+            this.TodoItem = new TodoItemDataModel
+                    {
+                        Title = "My Todo Item",
+                        Notes = {
+                                    "My first note",
+                                    "My second note",
+                                    "A long note... A long note... A long note... A long note... A long note... A long note... A long note... A long note...  A long note... A long note... A long note... A long note... A long note... A long note..."
+                                }
+                    };
         }
     }
 }

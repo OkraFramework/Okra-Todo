@@ -9,22 +9,14 @@ namespace Okra.TodoSample.Data
 {
     public class TodoItem
     {
-        public string Id
-        {
-            get;
-            set;
-        }
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public bool Completed { get; set; }
+        public List<string> Notes { get; set; }
 
-        public string Title
+        public TodoItem()
         {
-            get;
-            set;
-        }
-
-        public bool Completed
-        {
-            get;
-            set;
+            Notes = new List<string>();
         }
     }
 }
