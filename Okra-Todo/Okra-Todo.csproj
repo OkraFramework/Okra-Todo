@@ -103,6 +103,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="Pages\About\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ItemDetail\ItemDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +129,10 @@
     <Compile Include="Data\ITodoRepository.cs" />
     <Compile Include="Data\TodoItem.cs" />
     <Compile Include="Data\TodoRepository.cs" />
+    <Compile Include="Pages\About\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\About\AboutViewModel.cs" />
     <Compile Include="Pages\ItemDetail\ItemDetailDesignData.cs" />
     <Compile Include="Pages\ItemDetail\ItemDetailPage.xaml.cs">
       <DependentUpon>ItemDetailPage.xaml</DependentUpon>
@@ -142,6 +150,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="en-US\Resources.resw" />
     <None Include="Okra-Todo_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
