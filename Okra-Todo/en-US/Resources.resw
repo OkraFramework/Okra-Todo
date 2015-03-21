@@ -121,4 +121,8 @@
     <value>About</value>
     <comment>Label to display in the settings pane for the 'AboutPage'</comment>
   </data>
+  <data name="SettingsCommandLabel" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Label to display in the settings pane for the 'Settings'</comment>
+  </data>
 </root>

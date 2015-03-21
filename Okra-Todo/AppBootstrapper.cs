@@ -38,6 +38,7 @@ namespace Okra.TodoSample
             // NB: Since we want the SettingsPaneManager to navigate when the item is selected we use the GetNavigateToSettingsCommand helper
 
             args.Request.ApplicationCommands.Add(SettingsPaneManager.GetNavigateToSettingsCommand(resourceLoader.GetString("AboutCommandLabel"), "AboutPage"));
+            args.Request.ApplicationCommands.Add(SettingsPaneManager.GetNavigateToSettingsCommand(resourceLoader.GetString("SettingsCommandLabel"), "Settings"));
         }
     }
 }

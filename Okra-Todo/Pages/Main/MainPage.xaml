@@ -8,23 +8,16 @@
     xmlns:behaviors="using:Okra.TodoSample.Behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DataContext="{d:DesignInstance Type=local:MainDesignData, IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
     <Page.Resources>
+        <SolidColorBrush x:Key="ActiveTaskBrush" Color="{Binding DataContext.AppSettings.ActiveTaskColor, ElementName=pageRoot}"/>
+        <SolidColorBrush x:Key="CompletedTaskBrush" Color="{Binding DataContext.AppSettings.CompletedTaskColor, ElementName=pageRoot}"/>
+
         <common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <DataTemplate x:Key="TodoItemTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Title}" Grid.Column="1" Style="{StaticResource SubheaderTextBlockStyle}" Margin="20,0,0,0"/>
-                <CheckBox IsChecked="{Binding Completed, Mode=TwoWay}"/>
-                <Rectangle Fill="Black" Height="1" VerticalAlignment="Center" Grid.Column="1" Margin="15,10,-10,0" Visibility="{Binding Completed, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            </Grid>
-        </DataTemplate>
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
@@ -68,7 +61,24 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <ListView ItemsSource="{Binding TodoItems}" ItemTemplate="{StaticResource TodoItemTemplate}" MaxWidth="800" SelectionMode="None" IsItemClickEnabled="True" Grid.Row="1">
+            <ListView ItemsSource="{Binding TodoItems}" MaxWidth="800" SelectionMode="None" IsItemClickEnabled="True" Grid.Row="1">
+                <ListView.Resources>
+                    <common:BooleanToBrushConverter x:Key="BooleanToBrushConverter" TrueValue="{StaticResource CompletedTaskBrush}" FalseValue="{StaticResource ActiveTaskBrush}"/>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="itemTitle" Text="{Binding Title}" Grid.Column="1" Style="{StaticResource SubheaderTextBlockStyle}" Margin="20,0,0,0" Foreground="{Binding Completed, Converter={StaticResource BooleanToBrushConverter}}"/>
+                            <CheckBox IsChecked="{Binding Completed, Mode=TwoWay}"/>
+                            <Rectangle Fill="Black" Height="1" VerticalAlignment="Center" Grid.Column="1" Margin="15,10,-10,0" Visibility="{Binding Completed, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
                 <i:Interaction.Behaviors>
                     <behaviors:ItemClickBehavior Command="{Binding ViewItemDetailCommand}"/>
                 </i:Interaction.Behaviors>

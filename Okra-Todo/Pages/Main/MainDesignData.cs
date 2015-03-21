@@ -12,6 +12,8 @@ namespace Okra.TodoSample.Pages.Main
     {
         public MainDesignData()
         {
+            this.AppSettings = new AppSettings() { ActiveTaskColor = "Blue", CompletedTaskColor = "Red" };
+
             this.TodoItems.Add(new TodoItemDataModel { Title = "First Design-Time Item" });
             this.TodoItems.Add(new TodoItemDataModel { Title = "Second Design-Time Item", Completed = true });
             this.TodoItems.Add(new TodoItemDataModel { Title = "Third Design-Time Item" });

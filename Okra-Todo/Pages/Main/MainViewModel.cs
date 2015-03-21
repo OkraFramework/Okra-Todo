@@ -32,6 +32,7 @@ namespace Okra.TodoSample.Pages.Main
     public class MainViewModel : ViewModelBase
     {
         private ITodoDataStore todoDataStore;
+        private IAppSettings appSettings;
 
         private DelegateCommand addNewItemCommand;
 
@@ -39,10 +40,11 @@ namespace Okra.TodoSample.Pages.Main
         private IList<TodoItemDataModel> todoItems = new ObservableCollection<TodoItemDataModel>();
 
         [ImportingConstructor]
-        public MainViewModel(INavigationContext navigationContext, ITodoDataStore todoRepository)
+        public MainViewModel(INavigationContext navigationContext, ITodoDataStore todoRepository, IAppSettings appSettings)
             : base(navigationContext)
         {
             this.todoDataStore = todoRepository;
+            this.appSettings = appSettings;
 
             this.addNewItemCommand = new DelegateCommand(AddNewItem, CanAddNewItem);
             this.RemoveCompletedItemsCommand = new DelegateCommand(RemoveCompletedItems);
@@ -53,6 +55,18 @@ namespace Okra.TodoSample.Pages.Main
 
         protected MainViewModel()
         {
+        }
+
+        public IAppSettings AppSettings
+        {
+            get
+            {
+                return appSettings;
+            }
+            protected set
+            {
+                appSettings = value;
+            }
         }
 
         public ICommand AddNewItemCommand
