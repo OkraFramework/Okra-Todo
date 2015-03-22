@@ -18,7 +18,10 @@ using Windows.UI.Xaml.Navigation;
 using Okra.TodoSample.DataModels;
 using System.Threading.Tasks;
 using Okra.Core;
+using Okra.Sharing;
 using System.Windows.Input;
+using System.Text;
+using Windows.ApplicationModel.DataTransfer;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -28,7 +31,7 @@ namespace Okra.TodoSample.Pages.ItemDetail
     /// A basic view model that provides characteristics common to most applications.
     /// </summary>
     [ViewModelExport("ItemDetail")]
-    public class ItemDetailViewModel : ViewModelBase, IActivatable
+    public class ItemDetailViewModel : ViewModelBase, IActivatable, IShareable
     {
         private ITodoDataStore todoDataStore;
 
@@ -102,6 +105,28 @@ namespace Okra.TodoSample.Pages.ItemDetail
         public bool CanAddNote()
         {
             return !string.IsNullOrEmpty(AddNoteText);
+        }
+
+        public Task ShareRequested(IShareRequest shareRequest)
+        {
+            shareRequest.Data.Properties.Title = string.Format("Todo Item: {0}", TodoItem.Title);
+
+            StringBuilder htmlBuilder = new StringBuilder();
+            htmlBuilder.AppendFormat("<h1>{0}</h1>", TodoItem.Title);
+
+            if (TodoItem.Notes.Count > 0)
+            {
+                htmlBuilder.Append("<h2>Notes</h2><ul>");
+
+                foreach (string note in TodoItem.Notes)
+                    htmlBuilder.AppendFormat("<li>{0}</li>", note);
+
+                htmlBuilder.Append("</ul>");
+            }
+
+            shareRequest.Data.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(htmlBuilder.ToString()));
+
+            return Task.FromResult(false);
         }
     }
 }

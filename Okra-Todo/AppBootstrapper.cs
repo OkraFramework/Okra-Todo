@@ -1,5 +1,6 @@
 ﻿using Okra;
 using Okra.Navigation;
+using Okra.Sharing;
 using System;
 using System.Collections.Generic;
 using System.Composition;
@@ -15,6 +16,9 @@ namespace Okra.TodoSample
     {
         [Import]
         public ISettingsPaneManager SettingsPaneManager { get; set; }
+
+        [Import]
+        public IShareSourceManager ShareSourceManager { get; set; }
 
         /// <summary>
         /// Perform general initialization of application services.
