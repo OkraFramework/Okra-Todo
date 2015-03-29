@@ -119,12 +119,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ShareTarget\ShareTarget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\ItemClickBehavior.cs" />
+    <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToBrushConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
@@ -155,6 +160,10 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\SettingsViewModel.cs" />
+    <Compile Include="Pages\ShareTarget\ShareTarget.xaml.cs">
+      <DependentUpon>ShareTarget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShareTarget\ShareTargetViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppBootstrapper.cs" />
   </ItemGroup>

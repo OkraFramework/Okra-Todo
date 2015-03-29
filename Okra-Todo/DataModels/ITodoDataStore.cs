@@ -11,6 +11,7 @@ namespace Okra.TodoSample.DataModels
         IList<TodoItemDataModel> GetTodoItems();
         Task<TodoItemDataModel> GetTodoItemByIdAsync(string id);
         Task AddTodoItemAsync(string title);
+        Task AddTodoItemAsync(string title, string[] notes);
         Task RemoveTodoItemAsync(TodoItemDataModel item);
 
         Task AddNoteAsync(TodoItemDataModel item, string note);

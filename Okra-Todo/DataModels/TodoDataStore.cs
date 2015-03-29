@@ -7,6 +7,8 @@ using System.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 
 namespace Okra.TodoSample.DataModels
 {
@@ -39,13 +41,31 @@ namespace Okra.TodoSample.DataModels
             return todoItems.First(i => i.Id == id);
         }
 
-        public async Task AddTodoItemAsync(string title)
+        public Task AddTodoItemAsync(string title)
+        {
+            return AddTodoItemAsync(title, new string[] { });
+        }
+
+        public async Task AddTodoItemAsync(string title, string[] notes)
         {
             TodoItem todoItem = await todoRepository.AddTodoItemAsync(new TodoItem { Title = title });
 
+            foreach (string note in notes)
+                await todoRepository.AddNoteAsync(todoItem.Id, note);
+
             TodoItemDataModel todoItemDataModel = new TodoItemDataModel(todoItem);
             todoItemDataModel.PropertyChanged += TodoItemDataModel_PropertyChanged;
-            this.todoItems.Add(todoItemDataModel);
+
+            // NB: Since this method may be called from an external "Share" operation, this is a bit
+            //     of a hack to transfer control to the main application thread to update the UI
+
+            await System.Threading.Tasks.Task.Run(async () =>
+                {
+                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        this.todoItems.Add(todoItemDataModel);
+                    });
+                });
         }
 
         public async Task RemoveTodoItemAsync(TodoItemDataModel item)

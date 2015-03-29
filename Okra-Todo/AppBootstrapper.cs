@@ -20,6 +20,9 @@ namespace Okra.TodoSample
         [Import]
         public IShareSourceManager ShareSourceManager { get; set; }
 
+        [Import]
+        public IShareTargetManager ShareTargetManager { get; set; }
+
         /// <summary>
         /// Perform general initialization of application services.
         /// </summary>
@@ -30,6 +33,9 @@ namespace Okra.TodoSample
 
             // Register with Windows to display items in the settings pane
             SettingsPane.GetForCurrentView().CommandsRequested += SettingsPane_CommandsRequested;
+
+            // Set the page name to act as a share target
+            ShareTargetManager.ShareTargetPageName = "ShareTarget";
         }
 
         void SettingsPane_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
