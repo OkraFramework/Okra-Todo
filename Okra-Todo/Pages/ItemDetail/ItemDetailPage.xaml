@@ -50,24 +50,26 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
         <ScrollViewer Grid.Row="1" HorizontalScrollMode="Disabled" ZoomMode="Disabled">
-            <Grid MaxWidth="800" Margin="0,0,0,40" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto" MinHeight="100"/>
-                    <RowDefinition Height="140"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Button Content="Add Note" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,7,0,0" Grid.Row="3" Command="{Binding AddNoteCommand, Mode=OneWay}" Height="34" Width="95"/>
-                <TextBox Grid.Row="2" TextWrapping="Wrap" Text="{Binding AddNoteText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Add a note to this task..." Margin="0,20,0,0"/>
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding TodoItem.Notes}" ItemTemplate="{StaticResource NoteItemTemplate}">
-                    <ItemsControl.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <AddDeleteThemeTransition/>
-                        </TransitionCollection>
-                    </ItemsControl.ItemContainerTransitions>
-                </ItemsControl>
-                <TextBlock TextWrapping="Wrap" Text="Notes" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,40"/>
-            </Grid>
+            <Border>
+                <Grid MaxWidth="800" Margin="20,0,20,40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" MinHeight="100"/>
+                        <RowDefinition Height="140"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Add Note" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,7,0,0" Grid.Row="3" Command="{Binding AddNoteCommand, Mode=OneWay}" Height="34" Width="95"/>
+                    <TextBox Grid.Row="2" TextWrapping="Wrap" Text="{Binding AddNoteText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Add a note to this task..." Margin="0,20,0,0"/>
+                    <ItemsControl Grid.Row="1" ItemsSource="{Binding TodoItem.Notes}" ItemTemplate="{StaticResource NoteItemTemplate}">
+                        <ItemsControl.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition/>
+                            </TransitionCollection>
+                        </ItemsControl.ItemContainerTransitions>
+                    </ItemsControl>
+                    <TextBlock TextWrapping="Wrap" Text="Notes" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,40"/>
+                </Grid>
+            </Border>
         </ScrollViewer>
     </Grid>
 </Page>
